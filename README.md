@@ -110,3 +110,5 @@ Contains components:
 ## Deployment
 
 Deployment was a little tricky on both the front- and back-end. Since `npm run build` creates a static directory, I was able to upload these files to the Namecheap hosting account I purchased with my domain via cPanel's interface. I had to switch from using `BrowserRouter` to `HashRouter` to prevent my frontend server from looking for directories for each of my routes (i.e. `/stats`, `/add`, etc).
+
+## Star this repository if you like it
