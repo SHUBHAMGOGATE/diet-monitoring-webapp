@@ -143,7 +143,7 @@ class LogInView extends Component {
 		} else {
 			welcomeText = (
 				<p>
-					<b>Welcome!</b> EasyCal is a simple nutrition app that helps you keep
+					<b>Welcome!</b> OnTrack is a simple nutrition app that helps you keep
 					track of your diet and exercise. <br />
 					<span>Please log in or register to continue.</span>
 				</p>
