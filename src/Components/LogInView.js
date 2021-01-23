@@ -12,7 +12,7 @@ class LogInView extends Component {
 			waiting: false,
 			email: "",
 			password: "",
-			errorMessage: undefined
+			errorMessage: undefined,
 		};
 	}
 
@@ -20,21 +20,21 @@ class LogInView extends Component {
 		e.preventDefault();
 		this.setState({
 			waiting: true,
-			errorMessage: undefined
+			errorMessage: undefined,
 		});
 		const reqObj = {
 			email: this.state.email,
-			password: this.state.password
+			password: this.state.password,
 		};
 
 		// different requests depending on whether user is registering or logging in
 		if (this.state.registering) {
 			fetch(deploymentConfig().apiUrl + "/api/users/register", {
 				method: "POST",
-				body: JSON.stringify(reqObj)
+				body: JSON.stringify(reqObj),
 			})
-				.then(resp => resp.json())
-				.then(res => {
+				.then((resp) => resp.json())
+				.then((res) => {
 					// check for errors creating user
 					if (res.error) {
 						if (res.message === "user exists") {
@@ -42,13 +42,13 @@ class LogInView extends Component {
 							this.setState({
 								waiting: false,
 								errorMessage:
-									"Looks like a user has already registered with that email address."
+									"Looks like a user has already registered with that email address.",
 							});
 						} else if (res.message === "missing field") {
 							this.setState({
 								waiting: false,
 								errorMessage:
-									"Looks like you forgot to supply either your email address or password."
+									"Looks like you forgot to supply either your email address or password.",
 							});
 						}
 					} else {
@@ -59,32 +59,32 @@ class LogInView extends Component {
 							deploymentConfig().baseUrl + "#/?onboard=true";
 					}
 				})
-				.catch(err => console.log("ERROR ", err));
+				.catch((err) => console.log("ERROR ", err));
 		} else {
 			// user is logging in (as opposed to registering)
 			fetch(deploymentConfig().apiUrl + "/api/users/login", {
 				method: "POST",
-				body: JSON.stringify(reqObj)
+				body: JSON.stringify(reqObj),
 			})
-				.then(resp => resp.json())
-				.then(res => {
+				.then((resp) => resp.json())
+				.then((res) => {
 					if (res.error) {
 						if (res.message === "user doesn't exist") {
 							this.setState({
 								waiting: false,
 								errorMessage:
-									"There isn't an account registered to that email address."
+									"There isn't an account registered to that email address.",
 							});
 						} else if (res.message === "incorrect pass") {
 							this.setState({
 								waiting: false,
-								errorMessage: "That password is incorrect."
+								errorMessage: "That password is incorrect.",
 							});
 						} else if (res.message === "missing field") {
 							this.setState({
 								waiting: false,
 								errorMessage:
-									"Looks like you forgot to supply either your email address or password."
+									"Looks like you forgot to supply either your email address or password.",
 							});
 						}
 					} else {
@@ -94,25 +94,25 @@ class LogInView extends Component {
 						window.location.hash = deploymentConfig().baseUrl + "#/";
 					}
 				})
-				.catch(err => console.log("ERROR ", err));
+				.catch((err) => console.log("ERROR ", err));
 		}
 	}
 
 	handleEmailChange(e) {
 		this.setState({
-			email: e.target.value
+			email: e.target.value,
 		});
 	}
 
 	handlePasswordChange(e) {
 		this.setState({
-			password: e.target.value
+			password: e.target.value,
 		});
 	}
 
 	switchActionType() {
-		this.setState(prevState => ({
-			registering: !prevState.registering
+		this.setState((prevState) => ({
+			registering: !prevState.registering,
 		}));
 	}
 
@@ -143,7 +143,7 @@ class LogInView extends Component {
 		} else {
 			welcomeText = (
 				<p>
-					<b>Welcome!</b> to OnTrack  <br>
+					<b>Welcome!</b> to OnTrack <br />
 					<span>Please log in or register to continue.</span>
 				</p>
 			);
