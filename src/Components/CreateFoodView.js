@@ -13,7 +13,7 @@ import sodiumIcon from '../resources/fries-emoji.png';
 class CreateFoodView extends Component {
 
 	componentDidMount() {
-		document.title = 'EasyCal: Create Food';
+		document.title = 'OnTrack: Create Food';
 	}
 
   handleSubmit(e) {
