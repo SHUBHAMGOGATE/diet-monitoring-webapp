@@ -34,7 +34,7 @@ class StatisticsView extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "EasyCal: Statistics";
+		document.title = "OnTrack: Statistics";
 		window.scrollTo(0, 0);
 		const userId = decodeToken(localStorage.getItem("token")).userId;
 		fetch(
