@@ -6,7 +6,7 @@ import MyGoals from './MyGoals';
 class MyAccountView extends Component {
 
   componentDidMount() {
-    document.title = 'EasyCal: My Account';
+    document.title = 'OnTrack: My Account';
   }
 
   logUserOut() {
