@@ -143,8 +143,7 @@ class LogInView extends Component {
 		} else {
 			welcomeText = (
 				<p>
-					<b>Welcome!</b> OnTrack is a simple nutrition app that helps you keep
-					track of your diet and exercise. <br />
+					<b>Welcome!</b> to OnTrack  <br>
 					<span>Please log in or register to continue.</span>
 				</p>
 			);
