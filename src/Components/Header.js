@@ -9,7 +9,7 @@ class Header extends Component {
 			<header className="Header">
 				<div className="container Header-container">
 					<Link to={deploymentConfig().baseUrl + "/"}>
-						<img src={logo} alt="EasyCal" />
+						<img src={logo} alt="OnTrack" />
 					</Link>
 					<nav>
 						<Link

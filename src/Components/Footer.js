@@ -7,7 +7,7 @@ class Footer extends Component {
 	render() {
 		return (
 			<div className="Footer container">
-				<img src={logo} alt="EasyCal" />
+				<img src={logo} alt="OnTrack" />
 
 				{!this.props.onLogin && (
 					<span className="Footer__links">

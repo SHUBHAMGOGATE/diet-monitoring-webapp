@@ -18,22 +18,22 @@ class DayView extends Component {
 			selectedDay: this.getTodaysDate(),
 			meals: {
 				breakfast: {
-					items: []
+					items: [],
 				},
 				lunch: {
-					items: []
+					items: [],
 				},
 				dinner: {
-					items: []
+					items: [],
 				},
 				snacks: {
-					items: []
-				}
+					items: [],
+				},
 			},
 			goals: {},
 			caloriesBurned: undefined,
 			loadingItems: true,
-			removingItem: false
+			removingItem: false,
 		};
 	}
 
@@ -42,7 +42,7 @@ class DayView extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "EasyCal";
+		document.title = "OnTrack";
 		const qsParsed = qs.parse(this.props.location.search.slice(1));
 		let dayParam = qsParsed.day;
 		if (dayParam) {
@@ -72,12 +72,12 @@ class DayView extends Component {
 				date +
 				"&token=" +
 				localStorage.getItem("token")
-		).then(res => {
+		).then((res) => {
 			if (res.ok) {
-				return res.json().then(meals => {
+				return res.json().then((meals) => {
 					this.setState({
 						meals: meals,
-						loadingItems: false
+						loadingItems: false,
 					});
 				});
 			} else if (res.status === 403) {
@@ -100,7 +100,7 @@ class DayView extends Component {
 				date +
 				"&token=" +
 				localStorage.getItem("token")
-		).then(activity => {
+		).then((activity) => {
 			if (activity.caloriesBurned === 0) {
 				this.setState({ caloriesBurned: undefined });
 			} else {
@@ -118,7 +118,7 @@ class DayView extends Component {
 				userId +
 				"?token=" +
 				localStorage.getItem("token")
-		).then(goals => {
+		).then((goals) => {
 			this.setState({ goals: goals });
 		});
 	}
@@ -139,11 +139,11 @@ class DayView extends Component {
 				"/delete?token=" +
 				localStorage.getItem("token"),
 			{ method: "POST" }
-		).then(res => {
+		).then((res) => {
 			if (res.ok) {
 				let mealItemIndex, meal;
 				for (var mealName in this.state.meals) {
-					this.state.meals[mealName].items.forEach(item => {
+					this.state.meals[mealName].items.forEach((item) => {
 						if (item.consumptionId === consumptionId) {
 							mealItemIndex = this.state.meals[mealName].items.indexOf(item);
 							meal = mealName;
@@ -155,9 +155,9 @@ class DayView extends Component {
 				let newState = update(this.state, {
 					meals: {
 						[meal]: {
-							items: { $splice: [[mealItemIndex, 1]] }
-						}
-					}
+							items: { $splice: [[mealItemIndex, 1]] },
+						},
+					},
 				});
 				this.setState(newState);
 			} else if (res.status === 403) {
@@ -180,7 +180,7 @@ class DayView extends Component {
 			let totalCals, totalCarbs, totalFat, totalProtein;
 			totalCals = totalCarbs = totalFat = totalProtein = 0;
 			let meal = this.state.meals[mealName];
-			meal.items.forEach(item => {
+			meal.items.forEach((item) => {
 				let servingSizeMultiplier =
 					item.selectedServing.quantity *
 					item.selectedServing.servingSize.ratio;
@@ -194,7 +194,7 @@ class DayView extends Component {
 				calories: totalCals,
 				carbs: totalCarbs,
 				fat: totalFat,
-				protein: totalProtein
+				protein: totalProtein,
 			});
 		}
 		return newMealTotals;
@@ -204,7 +204,7 @@ class DayView extends Component {
 		// calculate consumption totals (nutrients & calories)
 		let caloriesEaten, carbs, fat, protein;
 		caloriesEaten = carbs = fat = protein = 0;
-		mealTotals.forEach(mealTotal => {
+		mealTotals.forEach((mealTotal) => {
 			caloriesEaten += mealTotal.calories;
 			carbs += mealTotal.carbs;
 			fat += mealTotal.fat;
@@ -220,7 +220,7 @@ class DayView extends Component {
 			netCalories: netCalories,
 			carbs: carbs,
 			fat: fat,
-			protein: protein
+			protein: protein,
 		};
 	}
 
@@ -231,7 +231,7 @@ class DayView extends Component {
 	handleServingUpdate(newItemsList, mealType) {
 		let updatedConsumption;
 		// determine consumption for which serving was updated
-		this.state.meals[mealType].items.forEach(item => {
+		this.state.meals[mealType].items.forEach((item) => {
 			let correspondingNewItem =
 				newItemsList.items[this.state.meals[mealType].items.indexOf(item)];
 			if (
@@ -245,7 +245,7 @@ class DayView extends Component {
 		});
 		if (updatedConsumption) {
 			let reqObj = {
-				consumption: updatedConsumption
+				consumption: updatedConsumption,
 			};
 			fetch(
 				deploymentConfig().apiUrl +
@@ -255,14 +255,14 @@ class DayView extends Component {
 					localStorage.getItem("token"),
 				{
 					method: "POST",
-					body: JSON.stringify(reqObj)
+					body: JSON.stringify(reqObj),
 				}
-			).then(res => {
+			).then((res) => {
 				if (res.ok) {
 					let newState = update(this.state, {
 						meals: {
-							[mealType]: { $set: newItemsList }
-						}
+							[mealType]: { $set: newItemsList },
+						},
 					});
 					this.setState(newState);
 				} else {
@@ -293,10 +293,10 @@ class DayView extends Component {
 		const activityObj = {
 			userId: userId,
 			caloriesBurned: calsBurned,
-			day: this.state.selectedDay
+			day: this.state.selectedDay,
 		};
 		const reqObj = {
-			activity: activityObj
+			activity: activityObj,
 		};
 		fetch(
 			deploymentConfig().apiUrl +
@@ -304,9 +304,9 @@ class DayView extends Component {
 				localStorage.getItem("token"),
 			{
 				method: "POST",
-				body: JSON.stringify(reqObj)
+				body: JSON.stringify(reqObj),
 			}
-		).then(res => {
+		).then((res) => {
 			if (!res.ok) {
 				alert("Something went wrong while saving this activity.");
 			}

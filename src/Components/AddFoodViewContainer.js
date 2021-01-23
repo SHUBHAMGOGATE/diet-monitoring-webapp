@@ -10,12 +10,12 @@ class AddFoodViewContainer extends Component {
 		super(props);
 		this.state = {
 			tab: undefined,
-			mealGroupContext: undefined
+			mealGroupContext: undefined,
 		};
 	}
 
 	componentDidMount() {
-		document.title = "EasyCal: Add a Food";
+		document.title = "OnTrack: Add a Food";
 		window.scrollTo(0, 0);
 	}
 
@@ -27,12 +27,12 @@ class AddFoodViewContainer extends Component {
 				"?token=" +
 				localStorage.getItem("token")
 		)
-			.then(resp => resp.json())
-			.then(mealGroup => {
+			.then((resp) => resp.json())
+			.then((mealGroup) => {
 				this.setState({ mealGroupContext: mealGroup });
 			})
 			.then(() => this.setState({ tab: 1 }))
-			.catch(err => console.log("ERROR ", err));
+			.catch((err) => console.log("ERROR ", err));
 	}
 
 	handleDoneAddingFoodsClick() {
