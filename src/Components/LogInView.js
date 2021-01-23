@@ -190,7 +190,7 @@ class LogInView extends Component {
 
 		return (
 			<div className="LogInView content-container">
-				<img className="LogInView__logo" src={logo} alt="EasyCal" />
+				<img className="LogInView__logo" src={logo} alt="OnTrack" />
 				{welcomeText}
 
 				<div className="LogInView__form">
